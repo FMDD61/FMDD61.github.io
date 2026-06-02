@@ -1,0 +1,18 @@
+=== dkms status (initial) ===
+nvidia-srv/580.159.03, 6.17.0-29-generic, x86_64: installed
+nvidia-srv/580.159.03, 6.17.0-35-generic, x86_64: installed (WARNING! Diff between built and installed module!) (WARNING! Diff between built and installed module!) (WARNING! Diff between built and installed module!) (WARNING! Diff between built and installed module!) (WARNING! Diff between built and installed module!)
+v4l2loopback/0.12.7, 6.14.0-37-generic, x86_64: installed
+v4l2loopback/0.12.7, 6.17.0-29-generic, x86_64: installed
+v4l2loopback/0.12.7, 6.17.0-35-generic, x86_64: installed
+
+=== dkms autoinstall error ===
+Error! your kernal headers for kernel 6.17.0-35-generic cannot be found at /lib/modules/6.17.0-35-generic/build or /lib/modules/6.17.0-35-generic/source
+Please install the linux-headers-6.17.0-35-generic package or use the --kernalsourcedir option to tell DKMS where it's located
+
+=== uname -r ===
+6.17.0-35-generic
+
+=== Available kernels ===
+/boot/vmlinuz-6.14.0-37-generic
+/boot/vmlinuz-6.17.0-29-generic
+/boot/vmlinuz-6.17.0-35-generic

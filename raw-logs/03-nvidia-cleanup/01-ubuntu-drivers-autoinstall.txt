@@ -1,0 +1,19 @@
+=== ubuntu-drivers autoinstall (caused kernel 35 re-installation) ===
+udevadm hwdb is deprecated. Use systemd-hwdb instead. (repeated 14 times)
+
+The following NEW packages will be installed:
+  linux-image-6.17.0-35-generic
+  linux-modules-6.17.0-35-generic
+  linux-modules-nvidia-595-open-6.17.0-35-generic
+  linux-modules-nvidia-595-open-generic-hwe-24.04
+  nvidia-driver-595-open
+
+Key log line:
+dkms: autoinstall for kernel 6.17.0-35-generic was skipped since the kernel headers
+for this kernel do not seem to be installed
+
+I: /boot/vmlinuz is now a symlink to vmlinuz-6.17.0-35-generic
+I: /boot/initrd.img is now a symlink to initrd.img-6.17.0-35-generic
+
+Info: selecting the on-demand profile
+Writing /lib/modprobe.d/nvidia-runtimepm.conf

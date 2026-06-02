@@ -1,0 +1,21 @@
+=== gdm3 service status ===
+gdm3 显示 active(running)，但是有两处报错：
+Gdm: on_display_removed: assertion 'GDM_IS_REMOTE_DISPLAY (display)' failed
+
+=== journalctl -u gdm3 ===
+-- No entries --
+
+=== /etc/gdm3/custom.conf ===
+[daemon]
+WaylandEnable=false
+  AutomaticLoginEnable = true
+  AutomaticLogin = user1
+[security]
+[xdmcp]
+[chooser]
+[debug]
+
+=== loginctl ===
+SESSION UID USER SEAT TTY STATE IDLE SINCE
+2 1000 uzone seat0 tty2 active no -
+1 session listed.

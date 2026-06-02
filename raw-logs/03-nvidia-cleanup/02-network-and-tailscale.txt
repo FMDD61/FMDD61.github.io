@@ -1,0 +1,10 @@
+=== nmcli device status (on 6.17.0-35, tty) ===
+DEVICE    TYPE      STATE                  CONNECTION
+lo        loopback  connected (externally) lo
+docker0   bridge    connected (externally) docker0
+tailscale tun       unmanaged             --
+
+# No WiFi/Ethernet interfaces visible — network driver not loaded on 35 kernel
+
+=== Tailscale IP ===
+100.106.251.91

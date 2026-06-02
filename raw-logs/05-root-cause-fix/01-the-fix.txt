@@ -1,0 +1,15 @@
+=== Installing missing extras (THE FIX) ===
+sudo apt install linux-modules-extra-6.17.0-35-generic linux-headers-6.17.0-35-generic
+sudo apt install --reinstall linux-firmware
+sudo update-initramfs -u -k 6.17.0-35-generic
+
+=== Verification after fix ===
+ls /lib/modules/6.17.0-35-generic/kernel/drivers/gpu/drm/amd/amdgpu/amdgpu.ko*
+→ amdgpu.ko.zst (now exists!)
+
+=== Post-fix boot (35 kernel, SUCCESS) ===
+uname -r → 6.17.0-35-generic
+ls /dev/dri/ → by-path  card1  card2  renderD128  renderD129
+lsmod | grep amdgpu → amdgpu loaded with 13 users
+nvidia-smi → Driver Version: 580.159.03, GPU: RTX 3060 Laptop GPU
+prime-select query → on-demand

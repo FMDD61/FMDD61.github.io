@@ -1,0 +1,23 @@
+=== nvidia-persistenced version mismatch ===
+dpkg -S $(which nvidia-persistenced)
+→ nvidia-compute-utils-580-server: /usr/bin/nvidia-persistenced
+
+nvidia-persistenced --version
+→ version 590.48.01  (!! 590 binary, but dpkg thinks it's from 580 package)
+
+=== Orphan 590 binaries (date: 1月 7) ===
+/usr/bin/nvidia-persistenced   (590.48.01)
+/usr/bin/nvidia-powerd         (590.48.01)
+/usr/bin/nvidia-pcc            (590.48.01)
+/usr/bin/nvidia-ngx-updater    (590.48.01)
+/usr/bin/nvidia-cuda-mps-control (590.48.01)
+/usr/bin/nvidia-cuda-mps-server  (590.48.01)
+
+=== Orphan 590 libraries ===
+find /usr/lib /usr/lib32 -name '*nvidia*590*' → 44 files
+Including: libnvidia-ml.so.590.48.01, libGLX_nvidia.so.590.48.01, etc.
+
+=== After fix ===
+nvidia-persistenced --version → 580.159.03
+nvidia-smi --version → 580.159.03
+All binaries now dated 4月 24 (580 package date)

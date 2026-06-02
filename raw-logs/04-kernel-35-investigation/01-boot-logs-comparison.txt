@@ -1,0 +1,46 @@
+=== 35 boot kernel log (nvidia loads but no /dev/nvidia*) ===
+kernel: nvidia: loading out-of-tree module taints kernel.
+kernel: nvidia 0000:01:00.0: enabling device (0000 -> 0003)
+kernel: NVRM: loading NVIDIA UNIX x86_64 Kernel Module  580.159.03
+kernel: nvidia-modeset: Loading NVIDIA Kernel Mode Setting Driver for UNIX platforms  580.159.03
+kernel: [drm] [nvidia-drm] [GPU ID 0x00000100] Loading driver
+kernel: nvidia-modeset: WARNING: GPU:0: Unable to read EDID for display device DP-4
+kernel: [drm] Initialized nvidia-drm 0.0.0 for 0000:01:00.0 on minor 1
+kernel: nvidia 0000:01:00.0: [drm] Cannot find any crtc or sizes
+kernel: nvidia_uvm: module uses symbols nvUvmInterfaceDisableAccessCntr from proprietary module nvidia, inheriting taint.
+
+nvidia-persistenced: Failed to query NVIDIA devices. Please ensure that the NVIDIA device files (/dev/nvidia*) exist
+systemd: Failed to start nvidia-persistenced.service
+
+=== 35 boot kernel log (after nvidia cleanup, no xorg.conf fix) ===
+kernel: nvidia: loading out-of-tree module taints kernel.
+kernel: nvidia 0000:01:00.0: enabling device (0000 -> 0003)
+kernel: NVRM: loading NVIDIA UNIX x86_64 Kernel Module  580.159.03
+kernel: nvidia-modeset: Loading NVIDIA Kernel Mode Setting Driver for UNIX platforms  580.159.03
+kernel: [drm] [nvidia-drm] [GPU ID 0x00000100] Loading driver
+kernel: nvidia-modeset: WARNING: GPU:0: Unable to read EDID for display device DP-4
+kernel: [drm] Initialized nvidia-drm 0.0.0 for 0000:01:00.0 on minor 1
+# Note: "Cannot find any crtc or sizes" is GONE — modprobe fix worked
+# But /dev/nvidia* still not created
+
+=== 35 boot kernel log (after xorg.conf removal + prime-select on-demand) ===
+# amdgpu module NEVER loaded on 35
+grep 'amdgpu' → only: "AMD Ryzen 7 5800H with Radeon Graphics" (CPU name, not GPU driver)
+
+Xorg log:
+(EE) systemd-logind: failed to take device /dev/dri/card0: No such file or directory
+(EE) open /dev/dri/card0: No such file or directory
+(EE) Unable to find a valid framebuffer device
+(EE) Screen 0 deleted because of no matching config section.
+(EE) Device(s) detected, but none match those in the config file.
+(EE) No devices detected.
+Fatal server error:
+
+=== 29 kernel (working) for comparison ===
+kernel: [drm] amdgpu kernel modesetting enabled.
+kernel: [drm] Detected VRAM RAM=4096M, BAR=4096M
+kernel: [drm] GART: num cpu pages 262144, num gpu pages 262144
+kernel: [drm] PCIE GART of 1024M enabled.
+
+ls /dev/dri/ → by-path  card1  card2  renderD128  renderD129
+lsmod | grep amdgpu → amdgpu loaded with 13 users
